@@ -1,0 +1,479 @@
+Title: Economic resources, sporting efficiency and uncertainty: a stochastic optimization model of football performance in Africa
+
+URL Source: https://arxiv.org/pdf/2610.06967v1
+
+Published Time: Wed, 07 Oct 2026 00:04:21 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# Economic resources, sporting efficiency and uncertainty: a stochastic optimization model of football performance in Africa 
+
+Thierno Thioune 1 and Babacar Mbaye Ndiaye 21Laboratory for Analysis, Research and Study of Development, University of Cheikh Anta Diop, Dakar, Senegal, thierno.thioune@ucad.edu.sn 
+
+> 2
+
+Laboratory of Mathematics of Decision and Numerical Analysis, University of Cheikh Anta Diop, Dakar, Senegal, babacarm.ndiaye@ucad.edu.sn 
+
+October 7, 2026 
+
+Abstract 
+
+We propose a stochastic optimization framework in which football performance is modeled as the result of an efficiency-driven production process under uncertainty. The model incorpo-rates economic inputs, a latent efficiency variable evolving according to a stochastic differential equation, and a control variable representing investment in sports development. We derive the associated discounted Hamilton–Jacobi–Bellman (HJB) equation, characterize the optimal in-vestment policy, prove a verification theorem under explicit growth conditions, and show that a bounded investment budget is required for the control problem to be well posed. We relate our efficiency measure to the stochastic frontier and data envelopment analysis (SFA/DEA) traditions used elsewhere in sports economics, and clarify what a dynamic control formulation adds relative to those static approaches. The theoretical results are illustrated with a numerical solution of the HJB equation – validated by a grid-refinement convergence study – and Monte Carlo simulations. A cross-sectional analysis of the 24 AFCON 2025 national teams, based on GDP, population, and FIFA ranking data, estimates country-specific conditional log-efficiency residuals using heteroskedasticity-robust inference. We show that these residuals are mechani-cally and strongly correlated with FIFA points by construction, quantify this dependence, and interpret the results accordingly. Teams such as Senegal and Morocco consistently outperform their GDP-implied potential, whereas others, including South Africa and Tanzania, tend to underperform. While these patterns are broadly consistent with observed AFCON outcomes, the estimated residual also captures unobserved factors, such as institutional quality, diaspora talent, and demographic structure, that are not included in the model. 
+
+Keywords. economic capacity, football performance, African national teams, stochastic opti-mization, uncertainty, stochastic differential equation, stochastic frontier analysis. 
+
+# 1 Introduction 
+
+This research examines the performance of African football by considering three main dimensions: economic resources (budgets, infrastructure, investments), sporting efficiency (the ability to trans-late available resources into sporting results), and the uncertainty associated with competitions (unpredictable events in matches, injuries, and unpredictable performances). Using a stochastic 1arXiv:2610.06967v1 [math.OC] 3 Oct 2026 optimization model, the study seeks to determine how national federations can effectively allocate resources to maximize performance while managing the risks and uncertainties inherent in the sport. The relationship between economic development and sporting performance has long been de-bated in sports economics [Szymanski, 2003, Andreff, 2011]. While wealthier nations are often expected to perform better due to greater access to resources, empirical evidence from African football suggests a more complex reality: Manuel Luiz and Fadal [2011] document that sports performance in Africa is better explained relative to GDP per capita than by GDP levels alone, and Batarfi and Reade [2021] show that, globally, institutional quality and domestic footballing structures matter alongside GDP per capita in explaining national team performance. In the context of the Africa Cup of Nations (AFCON), several countries with relatively modest economic indicators consistently outperform larger economies. This observation raises a fundamen-tal question: is football performance primarily driven by economic capacity, or by the efficiency with which resources are transformed into sporting outcomes? This paper proposes a stochastic optimization framework to address this question. Rather than assuming a direct deterministic relationship between economic variables and performance, we model performance as the outcome of: a production function based on economic inputs, a latent efficiency factor, and stochastic shocks reflecting the inherent uncertainty of sport. The paper makes five contributions. First, we position the efficiency measure used throughout the paper relative to the stochastic frontier analysis (SFA) and data envelopment analysis (DEA) traditions that are the standard tools for measuring efficiency in sports economics (Section 2.4). In addition, we are explicit about what a dynamic control formulation adds – and does not add – relative to those static methods. Second, we specify the efficiency dynamics directly as a controlled process for the log-efficiency variable, derive the associated discounted Hamilton–Jacobi–Bellman equation and the resulting optimal investment rule, and prove a verification theorem under explicit growth conditions (Section 3). Third, we show that the control problem requires a bounded invest-ment budget to be well posed, and that the constrained value function can be validated by explicit finite-difference solution together with a grid-refinement convergence study anchored in the Barles– Souganidis convergence criteria (Section 5). Fourth, we provide transparent statistical inference for the cross-sectional estimation step, including heteroskedasticity-robust standard errors and a joint significance test with N = 24 (Sections 4 and 6), and we explicitly quantify the extent to which the estimated efficiency residual mechanically reproduces the raw FIFA ranking (Section 6.1.2). Fifth, we illustrate the model numerically, both by solving the HJB equation on a grid and by Monte Carlo simulation, and further with a cross-sectional empirical exercise on the 24 national teams that qualified for AFCON 2025 (Morocco), using GDP, population, and FIFA ranking data. The article is organized as follows. Section 2 sets out the economic and stochastic building blocks and positions the model relative to SFA/DEA. Section 3 formulates and solves the stochastic control problem, including the verification theorem. Section 4 outlines the estimation strategy and its inferential requirements. Section 5 reports the numerical illustration and the convergence study. Section 6 presents the cross-sectional empirical results, the circularity diagnostic, and the discussion. Finally, in Section 7, we present conclusions and perspectives. 
+
+# 2 Methodology 
+
+2.1 Economic inputs 
+
+For each country i at time t, we define a vector of observable economic variables. An earlier spec-ification used Xi,t = ( GDP i,t , GDP pc i,t , P op i,t ), but GDP i,t ≡ GDP pc i,t × P op i,t by accounting 2identity, so the three variables are perfectly collinear in logs (ln GDP i,t = ln GDP pc i,t + ln P op i,t )and cannot be used together as independent regressors. We instead retain two independent eco-nomic variables, 
+
+Xi,t = ( GDP i,t , P op i,t ),
+
+national economic size and population (footballing player pool); GDP pc i,t = GDP i,t /P op i,t remains available as a derived quantity wherever needed. 
+
+2.2 Sporting production function 
+
+We define a production function mapping economic inputs into potential sporting performance: 
+
+f (Xi,t ) = A · GDP α1 
+
+> i,t
+
+· P op α2 
+
+> i,t
+
+, (1) where A > 0 and α1, α 2 > 0 are parameters. This Cobb–Douglas specification captures the idea that economic capacity determines the potential for sporting performance, without guaranteeing it. 
+
+2.3 Stochastic performance equation 
+
+Observed performance is given by 
+
+Yi,t = θi,t f (Xi,t ) + εi,t , (2) where θi,t is a latent efficiency variable and εi,t ∼ N (0 , σ 2 
+
+> ε
+
+) represents measurement/match-day shocks. As made precise in Sections 2.4 and 6.1.2 below, the empirical counterpart of θi,t that we estimate in Section 6 is a conditional performance residual – performance net of the GDP- and population-based potential f (Xi,t ) – and not a structurally identified efficiency term in the sense of the stochastic frontier literature. 
+
+2.4 Relation to stochastic frontier analysis and DEA 
+
+Measuring “efficiency” as the capacity to transform resources into results is precisely the object of stochastic frontier analysis [SFA; Aigner et al., 1977] and of data envelopment analysis [DEA; Charnes et al., 1978], both of which are widely used in sports economics. It is therefore important to state clearly how the present framework relates to these standard tools, and what it adds. 
+
+What SFA and DEA do. SFA estimates a composed-error model yi = xiβ + vi − ui, where 
+
+vi is two-sided noise and ui ≥ 0 is a one-sided inefficiency term with an assumed distribution (half-normal, exponential, truncated normal), separately identified from noise via maximum likelihood. DEA constructs a non-parametric, piecewise-linear best-practice frontier by linear programming and measures each unit’s distance to that frontier, with no distributional assumption but no explicit noise term either. Both methods are static : they deliver a single efficiency score (or ranking) per cross-sectional unit at a point in time, estimated from a snapshot of inputs and outputs. 
+
+What the residual in this paper is – and is not. The empirical residual zi that we estimate by OLS in Section 6 (the log of observed performance net of the fitted GDP/population potential) is a symmetric residual, not a one-sided SFA inefficiency term: it can be positive or negative, it embeds ordinary measurement noise together with any true efficiency component, and no distributional assumption separates the two. It is, in this precise sense, closer to a corrected-OLS (COLS) shift of the fitted frontier than to an SFA-consistent decomposition, and considerably simpler than DEA. We are explicit about this throughout the paper (see Section 6.1.2), and we refer to zi as a conditional (log-)efficiency residual – performance conditional on GDP and population – rather than as a structurally identified efficiency parameter. 3What the HJB/control framework adds. The contribution of this paper is not a better 
+
+static efficiency estimator than SFA or DEA. It is a framework for what happens after an efficiency level – however estimated – is observed: a stochastic control problem in which a federation chooses a time path of investment ut to move a stochastic, mean-reverting efficiency state θt toward a higher long-run level, subject to a quadratic adjustment cost and a bounded budget, deriving a normative, forward-looking optimal investment rule (Section 3) rather than a backward-looking efficiency score. SFA and DEA answer “how efficient was unit i last period, relative to the frontier?”; the control problem answers “given a current efficiency state (however measured), how much should be invested, and how does that investment interact with mean reversion and volatility over time?”. The two are complementary rather than competing: a natural extension, noted in Section 7, is to feed a properly identified SFA (or panel COLS) efficiency estimate into the state zi, 0 of the dynamic model, in place of the simple cross-sectional OLS residual used here for illustration. 
+
+# 3 Efficiency dynamics and stochastic control 
+
+3.1 Log-efficiency process with control 
+
+Let ui,t ≥ 0 denote investment in football development (training, infrastructure, governance). We specify the controlled log-efficiency process directly, which guarantees θi,t > 0 pathwise and nests the uncontrolled, mean-reverting benchmark case ui,t ≡ 0: 
+
+dz i,t = κi(¯ zi − zi,t ) + γiui,t 
+
+ dt + σi dW i,t , θi,t = ezi,t , (3) with κi > 0 the speed of mean reversion, ¯ zi the long-run (structural) log-efficiency level, σi > 0volatility, and γi > 0 converting investment into log-efficiency growth. Working with the process for zi,t = ln θi,t directly – rather than specifying dynamics for θi,t and separately for zi,t – avoids any risk of specifying two inconsistent laws of motion for the same object, and θi,t = ezi,t > 0 holds by construction for every admissible control path and every realization of W .
+
+3.2 Discounted objective function 
+
+Each country’s federation chooses an investment path to maximize expected discounted net per-formance over a horizon [0 , T ]: max 
+
+> ui, ·
+
+E
+
+Z T
+
+> 0
+
+e−ρt 
+
+θi,t f (Xi,t ) − ci 
+
+> 2
+
+u2
+
+> i,t
+
+
+
+dt 
+
+
+
+subject to Equation (3) , (4) where ρ ≥ 0 is a discount rate reflecting the federation’s time preference (a standard, technically inoffensive addition to the objective; ρ = 0 recovers the undiscounted case used in some of the numerical illustrations below). The quadratic cost ci 
+
+> 2
+
+u2 
+
+> i,t
+
+reflects diminishing returns/increasing marginal cost of investment (absorptive capacity, governance bottlenecks). For tractability we treat f (Xi,t ) = fi,t as slowly varying relative to the football-specific efficiency shocks and take it as given over the optimization horizon; a fully joint dynamic treatment of Xi,t is left for future work. 
+
+3.3 Hamilton–Jacobi–Bellman equation 
+
+Let V (z, t ) denote the value function for a representative country (subscripts i suppressed), defined as the supremum in Equation (4) over admissible controls starting from zt = z. Writing W (z, t ) := 4eρt V (z, t ) to absorb the discount factor into a time-inhomogeneous but discount-free PDE, dynamic programming gives 
+
+ρW − Wt = max 
+
+> u≥0
+
+h
+
+ez ft − c 
+
+> 2
+
+u2 +  κ(¯ z − z) + γu Wz + σ2 
+
+> 2
+
+Wzz 
+
+i
+
+, W (z, T ) = 0 . (5) The first-order condition with respect to u gives the unconstrained optimum uunc = ( γ/c ) Wz :optimal investment is proportional to the shadow price (marginal value) of log-efficiency. Since investment cannot be negative and is realistically bounded by a maximum feasible annual budget 
+
+umax , the admissible control set is u ∈ [0 , u max ], and the optimal policy is 
+
+u∗(z, t ) = clip 
+
+ γc Wz (z, t ), 0, u max 
+
+
+
+. (6) 
+
+3.4 Well-posedness: why a budget cap is needed 
+
+Equation (5) contains a reward term ez ft that is convex and unbounded in z, together with a control benefit γuW z that is only quadratically penalized. If u is left unconstrained, the feedback 
+
+uunc = ( γ/c )Wz can itself grow, which in turn grows Wz because the state is pushed toward larger z
+
+where the exponential reward is larger still; in numerical experiments (Section 5) the unconstrained scheme indeed diverges. Capping u at a finite umax removes this positive feedback loop and yields a bounded value function. Economically, this is not an ad hoc fix: real federations face hard budget constraints, so u ∈ [0 , u max ] is the natural admissible set, and Equations (5) and (6) should be understood with this constraint throughout. 
+
+3.5 A verification theorem 
+
+The argument above establishes why a bound on u is needed for well-posedness, but it is heuristic. We now state the precise sense in which a smooth solution of the constrained HJB equation (5) coincides with the value function, and in which the maximizer (6) is indeed optimal. 
+
+Assumption 1. W ∈ C1,2([0 , T ] × R) ∩ C([0 , T ] × R) solves Equation (5) , and there exist constants 
+
+C, λ > 0 such that, uniformly in t ∈ [0 , T ],
+
+|W (z, t )| + |Wz (z, t )| ≤ C 1 + eλ|z|.
+
+Theorem 1 (Verification) . Under Assumption 1, for every admissible control u· valued in [0 , u max ]
+
+and every initial state z0 = z,
+
+V (z, 0) := sup 
+
+> u·
+
+E
+
+Z T
+
+> 0
+
+e−ρt 
+
+θtft − c 
+
+> 2
+
+u2
+
+> t
+
+
+
+dt 
+
+
+
+= e−ρ·0W (z, 0) = W (z, 0) ,
+
+and the Markov feedback control u∗(z, t ) defined in Equation (6) is optimal. Proof. Because the admissible drift b(z, u ) = κ(¯ z − z) + γu is affine in z and Lipschitz, uniformly bounded in u ∈ [0 , u max ] by |b(z, u )| ≤ κ|¯z−z|+γu max , and the diffusion coefficient σ is constant, the controlled SDE (3) admits, for every admissible u·, a unique strong solution on [0 , T ]. A standard comparison/Gronwall argument (comparing zt pathwise to the uncontrolled Ornstein–Uhlenbeck process shifted by the bounded drift term γu max ) yields, for every p > 0, 
+
+E
+
+h
+
+sup 
+
+> t≤T
+
+ep|zt|i
+
+< ∞,
+
+5uniformly over admissible controls. This moment bound, together with Assumption 1, guarantees (i) that E[ezt ft] < ∞ so the objective in Equation (4) is well defined for every admissible control, and (ii) that the local martingale arising from applying Itˆ o’s formula to e−ρt W (zt, t ) along an admissible path is a true martingale (its quadratic variation has finite expectation by Cauchy–Schwarz and the moment bound). Applying Itˆ o’s formula to e−ρt W (zt, t ), using that W solves Equation (5) so that the drift term inside the expectation is bounded above by the running reward for every admissible 
+
+u (with equality at u = u∗), and taking expectations, gives W (z, 0) ≥ E[R T 
+
+> 0
+
+e−ρt (θtft − c 
+
+> 2
+
+u2 
+
+> t
+
+)dt ] for every admissible u·, with equality when ut = u∗(zt, t ). This is the standard verification argument for controlled diffusions with unbounded (here, exponential) running reward and a bounded control set; see Fleming and Soner [2006] (Chapter IV) or Pham [2009] (Theorem 3.5.2) for the general statement and the precise integrability conditions used here. This is the same verification logic that underlies the classical solution of Merton’s continuous-time portfolio problem [Merton, 1971], adapted here to a bounded control set and an exponential (rather than power or logarithmic) running reward. 
+
+Remark 1. Existence of a classical solution W satisfying Assumption 1 is a separate question from verification. Because uunc = ( γ/c )Wz is clipped to [0 , u max ], the nonlinearity in Equation (5) 
+
+is globally Lipschitz in Wz (the clip function is 1-Lipschitz and bounded), which is precisely what removes the blow-up mechanism discussed above and places Equation (5) within the class of semilin-ear parabolic PDEs with linear-growth nonlinearity for which classical existence results are available (via a Picard/fixed-point argument on the clipped equation, or via the stochastic representation of Pham [2009], Chapter 4). We do not repeat that construction here and instead verify the growth condition numerically in Section 5, where the solution is bounded on the computational domain and stable under grid refinement. 
+
+3.6 Interpretation 
+
+• Investment increases the drift of log-efficiency, hence (in expectation) future performance. 
+
+• Because performance is exponential (multiplicative) in z, the marginal value of investment 
+
+Wz – and hence optimal investment itself – is generically increasing in current efficiency (Sec-tion 5): efficiency and investment reinforce each other, consistent with cumulative-advantage dynamics in institutional quality. 
+
+• Costs and the budget cap limit excessive investment. 
+
+• Uncertainty ( σ) affects the dispersion, not the mean-reversion target, of outcomes. This is a finite-horizon stochastic optimal control problem with a nonlinear (quadratic in Wz )HJB equation; a closed-form solution is not available in general because the exponential forcing term and the linear-in-z drift term do not close under a low-dimensional ansatz. Analytical approx-imation techniques such as those of Dixit [1991] (local quadratic expansions around ¯ z) could deliver an approximate closed form for future work; here we solve Equation (5) numerically (Section 5). 
+
+# 4 Estimation strategy 
+
+4.1 Step 1: estimating the production function 
+
+Taking logs of the performance equation (using the two independent economic regressors of Sec-tion 2): ln Yi,t = ln A + α1 ln GDP i,t + α2 ln P op i,t + zi,t + εi,t . (7) 6With panel data, estimation can be performed using panel regression, fixed/random effects, or Bayesian hierarchical models. Section 6 reports a simple cross-sectional instance of this regression (a single time period, N = 24 countries), which already identifies α1, α 2 and the implied efficiency residuals zi, though not the dynamic parameters ( κi, σ i), for which a genuine panel (Step 2 below) is required. Because N = 24 is small, we report heteroskedasticity-robust standard errors (HC1/HC3) rather than relying on the classical homoskedastic formula, and we test the joint hypothesis H0 :
+
+α1 = α2 = 0 explicitly rather than reading significance off the point estimates alone (Section 6). 
+
+4.2 Step 2: state-space representation 
+
+The model can be written in state-space form. Observation equation: ln Yi,t = Xi,t β + zi,t + εi,t .
+
+State equation (Euler discretization of Equation (3) with step ∆): 
+
+zi,t +∆ = zi,t + κi(¯ zi − zi,t )∆ + γiui,t ∆ + ηi,t , ηi,t ∼ N (0 , σ 2 
+
+> i
+
+∆) .
+
+This linear-Gaussian state-space form is estimable by the Kalman filter and maximum likelihood [Hamilton, 1994], or, in nonlinear/non-Gaussian extensions, by particle filtering. 
+
+4.3 Step 3: efficiency measurement 
+
+Efficiency is recovered as θi,t = ezi,t , providing a ranking of countries based on performance relative to economic capacity – an empirically implementable counterpart to the theoretical efficiency mea-sure used throughout the model, subject to the caveat of Sections 2.4 and 6.1.2 that this residual is not a structurally identified, one-sided efficiency term in the SFA sense. 
+
+# 5 Numerical simulations and results 
+
+To illustrate the model’s behavior we solve Equation (5) numerically for a representative country and simulate the resulting controlled process, then compare two synthetic countries that differ in GDP-based potential f and in structural efficiency parameters ( κ, ¯z). All parameters in this section are illustrative (not calibrated to data) and chosen to satisfy the stability requirements of the numerical scheme; Section 6 then applies the model to real cross-sectional data. 
+
+5.1 Solution method 
+
+Equation (5) is solved by explicit finite-difference backward induction on a grid z ∈ [−2.5, 2.5] (201 points) and t ∈ [0 , T ] (6000 steps), with umax = 1. Central differences approximate Wz , W zz ; the time step satisfies the parabolic stability condition ∆ t ≤ 12 ∆z2/σ 2. Given the resulting policy grid 
+
+u∗(z, t ), sample paths zt (and hence θt = ezt ) are simulated by Euler–Maruyama, with u∗ obtained by interpolation on the grid. Baseline parameters: κ = 0 .8, ¯ z = 0, σ = 0 .35, γ = 0 .6, c = 1, f = 1, 
+
+ρ = 0 .03, T = 5 years. 
+
+Grid-refinement convergence study. 
+
+The explicit scheme used above is a monotone, consistent, and L∞-stable approximation of Equa-tion (5) whenever two mesh conditions hold: (i) the parabolic CFL condition ∆ t ≤ ∆z2/σ 2 (im-posed here with a safety factor, ∆ t ≤ 12 ∆z2/σ 2, so that the central coefficient of the scheme 7stays nonnegative), and (ii) the mesh ratio condition ∆ z ≤ σ2/ max z |b(z, u )|, with max z |b(z, u )| =
+
+κ(zmax −zmin )/2+ γu max = 2 .6 on our domain, which ensures the off-diagonal coefficients associated with the (centrally differenced) drift term remain nonnegative. Both conditions hold comfortably at the baseline resolution (∆ z = 0 .025 ≪ σ2/2.6 ≈ 0.047). By the Barles–Souganidis theorem [Barles and Souganidis, 1991], a monotone, consistent, L∞-stable scheme converges (locally uniformly) to the unique viscosity solution of Equation (5) as ∆ z, ∆t → 0. We verify this empirically with a grid-refinement study, halving ∆ z successively from 0 .10 to 0.0031 (six resolutions), each time refining ∆ t proportionally to ∆ z2 to preserve the same stability margin. Table 1 reports W (0 , 0) (the value function at the long-run efficiency level, t = 0) and the successive sup-norm differences on a common reference grid. Table 1: Grid-refinement convergence of the finite-difference HJB solution. 
+
+Nz Nt ∆z ∆t W (0 , 0) max |Wh − Wh/ 2| (reduction factor) 51 372 0.1000 1.34 × 10 −2 6.394431 –101 1,485 0.0500 3.37 × 10 −3 6.392110 2.386 × 10 −3
+
+201 5,940 0.0250 8.42 × 10 −4 6.391532 5.956 × 10 −4 (4 .01 ×)401 23,758 0.0125 2.10 × 10 −4 6.391388 1.488 × 10 −4 (4 .00 ×)801 95,031 0.00625 5.26 × 10 −5 6.391351 3.718 × 10 −5 (4 .00 ×)1601 380,122 0.00313 1.32 × 10 −5 6.391342 9.295 × 10 −6 (4 .00 ×)The successive differences shrink by a factor of almost exactly 4 at each halving of ∆ z (with ∆t ∝ ∆z2), consistent with the scheme’s expected first-order-in-time, second-order-in-space local truncation error, and confirm convergence of W (·, 0) to a stable limit well before the baseline resolution ( Nz = 201) used elsewhere in this paper – whose value already agrees with the finest grid to four significant digits. This is the empirical counterpart, at our chosen parameter values, of the Barles–Souganidis guarantee stated above. 
+
+5.2 Optimal investment policy 
+
+Figure 1 plots u∗(z, t ) at several dates. Two features stand out. First, at any given date, u∗ is increasing in z: because performance is exponential in log-efficiency, the marginal value of raising efficiency further is itself larger when efficiency is already high, so optimal investment is directed disproportionately toward already-efficient federations – a form of increasing returns to institutional investment, rather than the “catch-up” pattern one might have guessed a priori. Second, u∗ declines toward zero as t → T : with little time left to capture the benefits of higher efficiency, investment is not worthwhile close to the terminal date, the usual turnpike/vanishing-effort feature of finite-horizon control problems. 
+
+5.3 Simulated efficiency paths 
+
+Figure 2 shows twelve simulated sample paths of θt = ezt under the optimal control, together with the cross-sectional mean. Efficiency drifts upward from θ0 = 1 and fluctuates around an elevated level as investment counteracts mean reversion toward ¯ z = 0, consistent with the policy of Figure 1. 
+
+5.4 Value of optimal control 
+
+Table 2 and fig. 3 compare the expected discounted net objective Equation (4) (Monte Carlo, N =2000 paths) under three policies: no investment, a constant investment u = 0 .4, and the optimal 82 1 0 1 2log-efficiency z
+
+> 0.0 0.2 0.4 0.6 0.8 1.0 optimal investment  u * (z, t)
+
+Optimal feedback investment policy (discounted HJB solution) 
+
+> t=0.0 t=1.0 t=2.5 t=4.0 t=4.9
+
+Figure 1: Optimal feedback investment policy u∗(z, t ), obtained from the finite-difference solution of the discounted HJB equation Equations (5) and (6), at five dates over the horizon T = 5. 0 1 2 3 4 5time (years) 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 efficiency  t = ezt
+
+Simulated efficiency paths under optimal control 
+
+> mean path
+
+Figure 2: Simulated sample paths of efficiency θt = ezt under the optimal feedback control (12 paths, thin blue; cross-sectional mean, thick red). feedback policy u∗(z, t ). The optimal control policy strictly dominates both static alternatives, confirming numerically that the HJB solution characterizes a genuine improvement over naive investment rules, not merely a theoretical artifact. 
+
+5.5 GDP versus efficiency: a cross-country illustration 
+
+To illustrate the paper’s central empirical motivation directly, we simulate two synthetic countries, each starting from its own long-run efficiency level ( z0 = ¯ z) and receiving the same constant investment u = 0 .25 (this comparison is purely illustrative of the mechanism and is not itself a 9Table 2: Expected discounted net objective over T = 5 years, discount rate ρ = 0 .03, Monte Carlo estimates ( N = 2000 paths, standard error in parentheses). Policy Expected net objective No investment ( u = 0) 4.798 (0.017) Constant investment ( u = 0 .4) 5.648 (0.022) Optimal control u∗(z, t ) 6.386 (0.031) No investment (u = 0) Constant investment (u = 0.4) Optimal control 0123456expected discounted net performance  Value of optimal control vs. baselines ( T = 5, = 0.03) 
+
+Figure 3: Expected discounted net performance under the three investment policies of Table 2. discounted optimization exercise): 
+
+• Country A (high GDP, low efficiency): f = 1 .6, κ = 0 .3, ¯ z = −0.5; 
+
+• Country B (moderate GDP, high efficiency): f = 1 .0, κ = 0 .9, ¯ z = 0 .35. Despite a 60% larger GDP-based potential, Country A’s mean cumulative performance over T = 5 is 6 .70, against 8 .34 for Country B – a 24 .5% performance gap in favor of the less wealthy, more efficient country. Figure 4 plots the expected performance paths: the efficiency gap dominates the GDP gap throughout the horizon, providing a concrete numerical counterpart to the AFCON pattern that motivates the paper. 
+
+# 6 Empirical results and discussion 
+
+6.1 A 24-country cross-section: AFCON 2025 (Morocco) 
+
+We now apply the model to the 24 national teams that qualified for AFCON 2025, using real data: nominal GDP and GDP per capita from the IMF World Economic Outlook database (April 2026 edition), 1 and FIFA Men’s World Ranking points for the CAF zone, ranking dated 20 July   
+
+> 1International Monetary Fund, World Economic Outlook database, April 2026 edition, https://www.imf.org/ en/Publications/WEO . Population is computed as GDP/GDP pc .
+
+10 0 1 2 3 4 5time (years) 1.0 1.2 1.4 1.6 expected performance  [ tf]
+
+Moderate GDP + high efficiency can outperform high GDP + low efficiency          
+
+> Country A (high GDP, low efficiency)
+> f= 1.6, = 0.3, z=0.5
+> Country B (moderate GDP, high efficiency)
+> f= 1.0, = 0.9, z= 0.35
+
+Figure 4: Expected performance E[θtf ] for two synthetic countries differing in GDP-based potential and structural efficiency. 2026, 2 used as a continuously scaled, currently available proxy for footballing performance Yi in the absence of a bespoke AFCON points panel. The full dataset (GDP, population, FIFA points, estimated residuals, and code reproducing every table and figure in this paper) is provided as a reproducible supplementary file accompanying this submission. 
+
+6.1.1 Cross-sectional estimation and statistical inference 
+
+We estimate, by OLS on this single cross-section of N = 24 countries, ln(FIFA i) = ln A + α1 ln GDP i + α2 ln P op i + zi,
+
+using the corrected, non-collinear specification of Section 2. Table 3 reports the estimated coeffi-cients together with heteroskedasticity-robust (HC3) standard errors, appropriate given the small sample ( N = 24). Table 3: Cross-sectional OLS estimates, ln(FIFA i) on ln GDP i and ln P op i (N = 24). HC3 robust standard errors in parentheses. Coefficient Robust s.e. t p-value Constant (ln A) 6.9526 0.0898 77.41 < 0.001 ln GDP i (α1) 0.0606 0.0336 1.80 0.072 ln P op i (α2) 0.0063 0.0293 0.21 0.831 
+
+R2 = 0 .347, adjusted R2 = 0 .285 Joint test H0 : α1 = α2 = 0: F (2 , 21) = 5 .17, p = 0 .015 Three findings temper a purely mechanical reading of the elasticities. First, the individual GDP elasticity ˆ α1 = 0 .061 is only marginally significant at conventional levels ( p = 0 .072 with 
+
+> 2
+
+FIFA/CAF World Ranking, https://www.fifa.com/fifa-world-ranking , ranking date 20 July 2026. 
+
+11 HC3 standard errors), and the population elasticity ˆ α2 = 0 .006 is statistically indistinguishable from zero ( p = 0 .831); taken individually, neither coefficient offers strong evidence of a GDP or population effect on FIFA points. Second, the joint test H0 : α1 = α2 = 0 is nonetheless rejected at the 5% level ( F = 5 .17, p = 0 .015): GDP and population together explain a statistically significant, if modest, share of cross-country variation in footballing performance. Third, the fit is modest in an absolute sense ( R2 = 0 .35): GDP and population together explain about a third of the cross-country variation in FIFA points, leaving the bulk to the residual zi = ln(FIFA i)− dln f (GDP i, P op i). Rather than treating this residual as direct evidence of an efficiency channel, Section 6.1.2 below quantifies exactly how much of that residual variation is, by construction, simply a repackaging of the raw FIFA ranking. We take ¯ zi = zi as each country’s current structural log-efficiency level and fi = exp( dln f (GDP i, P op i)) as its structural GDP/population-based potential, and simulate Equation (3) forward from zi, 0 = ¯ zi
+
+with common structural parameters γ = 1, c = 1, and identical constant investment u = 0 .2 for every country over T = 5 years. We flag explicitly that setting ¯ zi = zi – i.e., treating each country’s currently estimated residual as its long-run structural target – is an identification assumption , not an innocuous normalization: it is what allows us to simulate forward from a single cross-section without a panel estimate of ¯ zi, and it mechanically preserves each country’s current relative stand-ing rather than allowing the model to independently discover it. A genuine panel estimate of ¯ zi
+
+(Step 2 of Section 4) is needed to relax this assumption; see Section 7. 
+
+An attempted calibration of κ, σ , and why it was not used. We attempted to calibrate the shared dynamic parameters κ (mean-reversion speed) and σ (volatility) to real data, using veri-fied AFCON results (podium finishes and quarter-finalists, cross-checked against official records) for the last four 24-team editions (2019, 2021, 2023, 2025). Identifying κ, σ from an AR(1)/Ornstein– Uhlenbeck regression requires country-level observations in two or more consecutive editions, but the great majority of the 24 countries have an independently verified result (top-4 finish or quarter-final exit) in only one of the four editions – the remaining cells would have to be filled in from unverified recollection rather than sourced results. With only a handful of usable consecutive pairs, a regression-based ˆ κ, ˆσ would be dominated by sampling noise rather than signal, so we do not report one: a spurious point estimate presented as “calibrated” would be worse than being explicit about the limitation. Genuinely identifying κi, σ i requires the kind of multi-cycle panel (AFCON points and time-varying GDP, several editions deep, for every country) that the Kalman-filter strategy of Step 2, Section 4, is built for; assembling that panel is future work. Here we instead run 
+
+κ, σ at an illustrative baseline ( κ = 0 .7, σ = 0 .30) and directly check, below, how much the results depend on that choice. 
+
+6.1.2 Quantifying circularity in the empirical exercise 
+
+With ˆ α1 = 0 .061 and ˆ α2 = 0 .006, the fitted production function is close to flat in the two economic regressors, so the residual zi is close to a re-centered version of ln(FIFA i). We quantify this explicitly rather than leave it implicit. By construction of the OLS residual, Corr( zi, ln(FIFA i)) = √1 − R2;with R2 = 0 .347 this gives Corr  zi, ln(FIFA i) = √1 − 0.347 = 0 .808 ,
+
+which we also confirm numerically from the estimated residuals (0 .8082). In other words, roughly 1 − R2 ≈ 65% of the cross-country variance in log FIFA points is, mechanically, still present in the “efficiency” residual zi. This is not a substantive empirical finding about football; it is an algebraic identity that holds for any regression with this R2, and it means that a ranking of countries by zi
+
+12 will necessarily look similar to a ranking by raw FIFA points. Consistent with this, the Spearman rank correlation between the country ranking implied by zi and the raw FIFA-points ranking is 0.734 ( p < 0.001). We draw two conclusions from this. First, statements of the form “Senegal and Morocco out-perform their GDP-implied potential” should be read, and are reported throughout this paper, as conditional on the weak explanatory power of the fitted production function : given how little of FIFA points GDP and population jointly explain ( R2 = 0 .35), a claim that country i has high 
+
+zi is close to, though not identical to, the more mundane claim that country i has a high FIFA ranking. Second, and more constructively, this is precisely why we relabel zi throughout this paper as a conditional performance residual (performance conditional on GDP and population) rather than as a validated structural efficiency parameter (Section 2.4): the residual almost certainly also absorbs omitted structural factors that are correlated with football performance but not modeled here – diaspora and expatriate players, football tradition, institutional quality [Batarfi and Reade, 2021], and working-age male population (15–35) rather than total population. Because we do not have reliable cross-country data on these factors for the present sample, we do not add them as additional controls in this version of the paper; instead we are explicit about the limitation here and in Section 7, and we requalify zi accordingly everywhere it is used, including in the abstract. 
+
+6.2 Results 
+
+Figure 5 ranks the 24 teams by zi. Senegal ( z = 0 .221) and Morocco ( z = 0 .207) are the largest positive residuals – both current AFCON champions/finalists, over-performing their GDP and population by a wide margin – followed by Mali, Cˆ ote d’Ivoire, Comoros, and Cameroon. Zimbabwe (z = −0.190), Tanzania, Botswana, Sudan, and Angola are the largest negative residuals, with South Africa, despite having the single largest GDP in the sample ( $427bn), at z = −0.065 and ranking only 10th out of 24 in simulated expected performance. Figure 6 plots ln GDP against ln(FIFA) directly, colored by zi: countries above the fitted line (green) systematically translate economic capacity into results more effectively than those below it (red). Table 4 reports the full underlying data. Figure 7 compares each country’s GDP rank to its simulated-performance rank (baseline κ =0.7, σ = 0 .30, Monte Carlo, N = 8 ,000 paths); the rank correlation is 0 .62 – positive, as expected, but far from 1, and several countries reverse rank by ten places or more: Senegal moves from GDP rank 15 to performance rank 2, and Tanzania moves from GDP rank 9 to performance rank 21. This is, to our knowledge, the first time this specific theoretical mechanism has been confronted – even in this simple, single-cross-section, illustrative way – with real GDP, population, and footballing-strength data for the full AFCON 2025 field. 
+
+Sensitivity to κ, σ . Since κ, σ are not calibrated, we check how much the headline results depend on them, over a grid κ ∈ { 0.3, 0.5, 0.7, 1.0, 1.5}, σ ∈ { 0.10 , 0.20 , 0.30 , 0.40 , 0.50 } (25 com-binations spanning slow/fast mean reversion and low/high volatility). Figure 8 plots the resulting GDP-rank/performance-rank correlation: it stays in a narrow band, [0 .605 , 0.643], across the en-tire grid (baseline: 0 .621). The three worst performers relative to GDP – Botswana, Sudan, and Zimbabwe – are identical across every one of the 25 ( κ, σ ) combinations tested; the three best performers are Egypt, Morocco, and Senegal at all but a small number of grid points, where Monte Carlo sampling noise occasionally reorders two closely-ranked countries. This is expected given the model’s structure: every country is simulated starting from its own estimated steady state zi, 0 = ¯ zi
+
+under the same κ, σ, γ, c, u , so κ, σ shift every country’s simulated path in a similar way and largely wash out of the relative ranking, which is driven overwhelmingly by the cross-sectional zi estimated in Section 6.1.1’s regression – exactly the quantity that is identified from current data. This is a 13 0.2 0.1 0.0 0.1 0.2  
+
+> conditional efficiency residual zi
+
+Zimbabwe Tanzania Botswana Sudan Angola Uganda South Africa Mozambique Zambia Benin Equatorial Guinea Gabon Egypt Nigeria Algeria Tunisia DR Congo Burkina Faso Cameroon Comoros Cote d'Ivoire Mali Morocco Senegal Conditional efficiency residual: over- vs under-performance relative to GDP and population (24 AFCON teams) Figure 5: Conditional efficiency residual zi for the 24 AFCON 2025 teams, from the cross-sectional regression of ln(FIFA i) on ln GDP i and ln P op i.1 2 3 4 5 6ln(GDP i), GDP measured in billion USD 7.0 7.1 7.2 7.3 7.4 7.5 ln(FIFA i), FIFA ranking points  Senegal Morocco Comoros South Africa Botswana Tanzania Zimbabwe 
+
+Economic potential vs. footballing performance (color = conditional efficiency residual zi)
+
+> OLS fit (GDP \& population, at mean population)
+
+0.20 
+
+0.15 
+
+0.10 
+
+0.05 
+
+0.00 0.05 0.10 0.15 0.20 
+
+> zi
+
+Figure 6: GDP versus FIFA ranking points (logs) for the 24 AFCON 2025 teams, colored by the conditional efficiency residual zi; dashed line is the OLS fit (evaluated at mean population). 14 0 5 10 15 20 25 GDP rank (1 = richest) 0510 15 20 25 Simulated performance rank (1 = best) 
+
+> Senegal Morocco Mali Cote d'Ivoire Comoros Cameroon Burkina Faso DR Congo Tunisia Algeria Nigeria Egypt Gabon Equatorial Guinea Benin Zambia Mozambique South Africa Uganda Angola Sudan Botswana Tanzania Zimbabwe
+
+GDP rank vs. simulated performance rank (rank correlation = 0.62) Figure 7: GDP rank versus simulated expected-performance rank for the 24 AFCON 2025 teams (rank correlation = 0 .62); points below the diagonal over-perform their GDP rank. reassuring, if partial, robustness result: it does not substitute for a genuine panel calibration of 
+
+κ, σ , but it shows the paper’s central ranking claim is not an artifact of the particular illustrative values chosen for the un-identified dynamic parameters. 0.1 0.2 0.3 0.4 0.5 
+
+0.3 0.5 0.7 1.0 1.5                     
+
+> 0.62 0.62 0.61 0.62 0.64 0.62 0.62 0.62 0.62 0.64 0.62 0.62 0.62 0.62 0.61 0.62 0.62 0.62 0.63 0.63 0.62 0.62 0.62 0.62 0.62
+
+Rank correlation (GDP vs. simulated performance) across ( , ): baseline =0.7, =0.3 marked 
+
+0.610 0.615 0.620 0.625 0.630 0.635 0.640 rank correlation 
+
+Figure 8: Rank correlation between GDP and simulated performance across a 5 × 5 grid of ( κ, σ )values; the baseline κ = 0 .7, σ = 0 .30 is marked with a star. 15 Table 4: Ranking: GDP vs. simulated performance ( T = 5, common u = 0 .2, baseline κ = 0 .7, σ =0.30).                                                                                                                                                                                
+
+> Country GDP ( $bn) Pop (M) FIFA ziGDP rk Perf. rk ∆rk South Africa 427.1 63.1 1451 −0.065 110 −9Egypt 364.6 107.9 1597 0.037 23−1Nigeria 290.5 237.5 1585 0.038 34−1Algeria 285.7 47.3 1577 0.044 45−1Morocco 182.6 37.7 1804 0.207 51+4 Angola 141.7 39.2 1266 −0.132 614 −8Cˆ ote d’Ivoire 98.9 32.9 1566 0.103 76+1 DR Congo 92.8 106.6 1496 0.054 87+1 Tanzania 87.3 67.6 1180 −0.176 921 −12 Uganda 66.0 48.0 1264 −0.088 10 15 −5Cameroon 59.3 29.9 1481 0.080 11 8+3 Tunisia 57.6 12.4 1427 0.049 12 11 +1 Zimbabwe 53.5 17.4 1120 −0.190 13 23 −10 Sudan 39.7 50.4 1157 −0.146 14 22 −8Senegal 37.1 19.2 1653 0.221 15 2+13 Mali 30.1 25.3 1456 0.104 16 9+7 Zambia 28.9 21.9 1256 −0.040 17 16 +1 Burkina Faso 27.1 24.1 1407 0.077 18 12 +6 Benin 24.4 14.9 1252 −0.030 19 17 +2 Mozambique 22.3 35.9 1219 −0.058 20 18 +2 Gabon 21.6 2.3 1273 0.005 21 13 +8 Botswana 19.5 2.6 1064 −0.169 22 24 −2Equatorial Guinea 12.5 1.6 1195 −0.022 23 19 +4 Comoros 1.6 0.9 1188 0.099 24 20 +4
+
+Remarks. This exercise uses FIFA ranking points, not AFCON tournament points, as the performance measure Yi, and a single cross-section rather than a panel, so zi should be read as “footballing strength relative to GDP and population, as of mid-2026,” and, per Section 6.1.2, as a residual that mechanically correlates with raw FIFA points at ρ = 0 .81; and γ, c , and (per the discussion above) κ, σ , are shared across countries and set at illustrative values rather than estimated individually. It nonetheless directly operationalizes, for the first time in this paper, the mechanism the theoretical model was built to capture, and the sensitivity analysis shows its central ranking result is not an artifact of the un-identified parameters. 
+
+6.3 Discussion 
+
+The model and its numerical illustration yield several insights: 
+
+• Economic resources determine potential, not performance: f (Xi,t ) sets the scale, but θi,t 
+
+determines how much of that potential is realized. 
+
+• Efficiency is the key driver of success, and, because performance is multiplicative in effi-ciency, gains in efficiency compound: the optimal policy directs more investment toward already-efficient federations (Section 5), which helps explain the persistence of over- and under-performance relative to GDP across cycles. 
+
+• Stochastic shocks explain variability in outcomes; volatility σi widens the distribution of possible results without shifting the long-run target ¯ zi.16 • Optimal investment policies depend on structural parameters ( κi, γ i, c i) and on the remaining time horizon, and are only well defined once a realistic investment budget cap is imposed. 
+
+• The conditional efficiency residual used in Section 6 is informative but should not be over-read: roughly two-thirds of its cross-country variance is, by construction, a restatement of the raw performance ranking (Section 6.1.2), and the remainder still mixes any genuine efficiency effect with omitted structural factors (diaspora, institutional quality, demographic structure) that are not separately controlled for here. In particular, the cross-country illustration of Section 5 shows, in a controlled numerical setting, that a country with moderate GDP but high efficiency can outperform a richer, less efficient country, and the 24-country cross-section of Section 6 shows a broadly consistent pattern in real GDP, population, and FIFA ranking data for the actual AFCON 2025 field – Senegal and Morocco substantially over-perform their economic potential, while South Africa, despite the largest GDP in the sample, and Tanzania and Zimbabwe under-perform theirs. This is qualitatively consistent with the empirical evidence in Manuel Luiz and Fadal [2011], Batarfi and Reade [2021], though, as emphasized throughout, the strength of that consistency is bounded by the weak explanatory power ( R2 = 0 .35) of the underlying production-function regression. The model suggests that: 
+
+• Improving governance and training systems is more effective than increasing budgets alone – as efficiency rises, increasingly, early institutional gains are worth protecting and building on. 
+
+• Strategic investment in football infrastructure yields long-term efficiency gains, but is subject to a genuine budget constraint: unlimited investment is not just unrealistic but, absent a cap, is not even well defined as an optimization problem (Section 3). 
+
+• Stability (low σi) reduces volatility and improves the reliability, though not necessarily the mean level, of expected performance. 
+
+# 7 Conclusion and future work 
+
+This paper proposes a stochastic optimization framework for understanding football performance in Africa. By modeling efficiency as a controlled stochastic process, deriving and verifying the associated Hamilton–Jacobi–Bellman equation under a discounted objective, and positioning the resulting efficiency measure explicitly relative to the stochastic frontier and DEA traditions, we pro-vide a theoretical explanation for the observed disconnect between economic capacity and sporting success, together with a normative optimal investment rule. We show that a bounded investment budget is required for well-posedness, give a verification theorem under explicit growth conditions, validate the numerical solution by a grid-refinement convergence study, and illustrate the resulting optimal policy and its cross-country implications by simulation. Applied to real data for the 24 AFCON 2025 national teams, the cross-sectional exercise reproduces the paper’s central qualita-tive claim – Senegal and Morocco over-perform their GDP-implied potential, while South Africa, Tanzania, and Zimbabwe under-perform theirs – while being explicit that roughly two-thirds of the underlying residual’s cross-country variance is, by construction, a restatement of the raw FIFA ranking, and that the residual still absorbs factors not modeled here. Future work may extend this framework to: 
+
+• a genuine multi-cycle panel estimate of ( κi, σ i, ¯zi) (AFCON tournament points, and time-varying GDP, several editions deep, for every country) via the Kalman-filter strategy of 17 Section 4, which alone can identify country-specific dynamic parameters and relax the ¯ zi = zi
+
+identification assumption used in Section 6; 
+
+• additional controls for the factors most likely to be absorbed into the current residual – diaspora and expatriate-player data, an institutional-quality index, and working-age (15–35) male population in place of total population – together with a properly specified stochastic frontier (SFA) decomposition of noise versus one-sided inefficiency, to reduce reliance on the symmetric-residual shortcut used here (Sections 2.4 and 6.1.2); 
+
+• player-level data and network effects (diaspora) and dynamic tournament modeling with strategic interaction between federations; 
+
+• analytical approximations to the HJB equation (e.g., local quadratic expansions in the spirit of Dixit [1991]) to complement the numerical solution. 
+
+# References 
+
+Dennis Aigner, C. A. Knox Lovell, and Peter Schmidt. Formulation and estimation of stochastic frontier production function models. Journal of Econometrics , 6(1):21–37, 1977. Wladimir Andreff. Some comparative economics of the organization of sports: Competition and regulation in north american vs. european professional team sports leagues. European Journal of Comparative Economics , 8(1):3–27, 2011. Guy Barles and Panagiotis E. Souganidis. Convergence of approximation schemes for fully nonlinear second order equations. Asymptotic Analysis , 4(3):271–283, 1991. Mohammed Batarfi and James J. Reade. Why are we so good at football, and they so bad? institutions and national footballing performance. De Economist , 169(1):63–80, 2021. Abraham Charnes, William W. Cooper, and Edwardo Rhodes. Measuring the efficiency of decision making units. European Journal of Operational Research , 2(6):429–444, 1978. Avinash Dixit. Analytical approximations in models of hysteresis. Review of Economic Studies , 58 (1):141–151, 1991. Wendell H. Fleming and H. Mete Soner. Controlled Markov Processes and Viscosity Solutions .Springer, 2nd edition, 2006. James D. Hamilton. State-space models. In Robert F. Engle and Daniel L. McFadden, editors, 
+
+Handbook of Econometrics , volume 4, chapter 50. North-Holland, 1994. John Manuel Luiz and Ricardo Fadal. An economic analysis of sports performance in africa. 
+
+International Journal of Social Economics , 38(10):869–883, 2011. Robert C. Merton. Optimum consumption and portfolio rules in a continuous-time model. Journal of Economic Theory , 3(4):373–413, 1971. Huyˆ en Pham. Continuous-time Stochastic Control and Optimization with Financial Applications .Springer, 2009. Stefan Szymanski. The economic design of sporting contests. Journal of Economic Literature , 41 (4):1137–1187, 2003. 18

@@ -1,0 +1,25 @@
+{
+  "date": "20260930-20261009",
+  "date_label": "2026-09-30 ~ 2026-10-09",
+  "generated_at": "2026-10-09 08:34:11 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.06967v1",
+      "route": "20260930-20261009/2610.06967v1-economic-resources-sporting-efficiency-and-uncertainty-a-stochastic-optimization-model-of-football-performance-in-africa",
+      "title": "Economic resources, sporting efficiency and uncertainty: a stochastic optimization model of football performance in Africa",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml-dea"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将效率度量与随机前沿和数据包络分析联系起来",
+      "first_seen_at": "2026-10-09 08:34:11 UTC",
+      "updated_at": "2026-10-09 08:34:11 UTC"
+    }
+  ]
+}

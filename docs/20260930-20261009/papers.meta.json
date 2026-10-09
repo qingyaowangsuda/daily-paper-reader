@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-30 ~ 2026-10-09",
+  "date": "2026-09-30 ~ 2026-10-09",
+  "generated_at": "2026-10-09T08:34:28",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "20260930-20261009/2610.06967v1-economic-resources-sporting-efficiency-and-uncertainty-a-stochastic-optimization-model-of-football-performance-in-africa",
+      "section": "deep",
+      "title_en": "Economic resources, sporting efficiency and uncertainty: a stochastic optimization model of football performance in Africa",
+      "authors": "Thierno Thioune, Babacar Mbaye Ndiaye",
+      "date": "2026-10-03",
+      "pdf": "https://arxiv.org/pdf/2610.06967v1",
+      "score": "8.0",
+      "evidence": "将效率度量与随机前沿和数据包络分析联系起来",
+      "tldr": "非洲足球表现受经济资源与不确定性影响，静态效率方法无法刻画动态投资决策。本研究提出随机优化框架，用随机微分方程建模潜在效率演化，推导HJB方程并证明验证定理。对2025年非洲杯24支球队的横截面分析显示，估计效率残差与FIFA积分强相关，塞内加尔、摩洛哥超GDP潜力，南非、坦桑尼亚表现欠佳。该动态控制模型补充SFA与DEA等静态方法，刻画投资预算约束，为体育效率评估提供新工具。",
+      "tags": "query:ml-dea",
+      "abstract_en": "We propose a stochastic optimization framework in which football performance is modeled as the result of an efficiency-driven production process under uncertainty. The model incorporates economic inputs, a latent efficiency variable evolving according to a stochastic differential equation, and a control variable representing investment in sports development. We derive the associated discounted Hamilton--Jacobi--Bellman (HJB) equation, characterize the optimal investment policy, prove a verification theorem under explicit growth conditions, and show that a bounded investment budget is required for the control problem to be well posed. We relate our efficiency measure to the stochastic frontier and data envelopment analysis (SFA/DEA) traditions used elsewhere in sports economics, and clarify what a dynamic control formulation adds relative to those static approaches. The theoretical results are illustrated with a numerical solution of the HJB equation -- validated by a grid-refinement convergence study -- and Monte Carlo simulations. A cross-sectional analysis of the 24 AFCON 2025 national teams, based on GDP, population, and FIFA ranking data, estimates country-specific conditional log-efficiency residuals using heteroskedasticity-robust inference.   We show that these residuals are mechanically and strongly correlated with FIFA points by construction, quantify this dependence, and interpret the results accordingly. Teams such as Senegal and Morocco consistently outperform their GDP-implied potential, whereas others, including South Africa and Tanzania, tend to underperform.   While these patterns are broadly consistent with observed AFCON outcomes, the estimated residual also captures unobserved factors, such as institutional quality, diaspora talent, and demographic structure, that are not included in the model.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

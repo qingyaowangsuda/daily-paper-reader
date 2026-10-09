@@ -1,0 +1,52 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-09T08:29:26.530737+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 1,
+    "deep_cap": 6,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 11,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2610.06967v1",
+      "source": "arxiv",
+      "title": "Economic resources, sporting efficiency and uncertainty: a stochastic optimization model of football performance in Africa",
+      "abstract": "We propose a stochastic optimization framework in which football performance is modeled as the result of an efficiency-driven production process under uncertainty. The model incorporates economic inputs, a latent efficiency variable evolving according to a stochastic differential equation, and a control variable representing investment in sports development. We derive the associated discounted Hamilton--Jacobi--Bellman (HJB) equation, characterize the optimal investment policy, prove a verification theorem under explicit growth conditions, and show that a bounded investment budget is required for the control problem to be well posed. We relate our efficiency measure to the stochastic frontier and data envelopment analysis (SFA/DEA) traditions used elsewhere in sports economics, and clarify what a dynamic control formulation adds relative to those static approaches. The theoretical results are illustrated with a numerical solution of the HJB equation -- validated by a grid-refinement convergence study -- and Monte Carlo simulations. A cross-sectional analysis of the 24 AFCON 2025 national teams, based on GDP, population, and FIFA ranking data, estimates country-specific conditional log-efficiency residuals using heteroskedasticity-robust inference.   We show that these residuals are mechanically and strongly correlated with FIFA points by construction, quantify this dependence, and interpret the results accordingly. Teams such as Senegal and Morocco consistently outperform their GDP-implied potential, whereas others, including South Africa and Tanzania, tend to underperform.   While these patterns are broadly consistent with observed AFCON outcomes, the estimated residual also captures unobserved factors, such as institutional quality, diaspora talent, and demographic structure, that are not included in the model.",
+      "authors": [
+        "Thierno Thioune",
+        "Babacar Mbaye Ndiaye"
+      ],
+      "primary_category": "math.OC",
+      "categories": [
+        "math.OC",
+        "stat.AP"
+      ],
+      "published": "2026-10-03T18:01:36+00:00",
+      "link": "https://arxiv.org/pdf/2610.06967v1",
+      "tags": [
+        "keyword:ml-dea"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "relates efficiency measure to stochastic frontier and data envelopment analysis",
+      "llm_evidence_cn": "将效率度量与随机前沿和数据包络分析联系起来",
+      "llm_evidence": "将效率度量与随机前沿和数据包络分析联系起来",
+      "canonical_evidence": "将效率度量与随机前沿和数据包络分析联系起来",
+      "llm_tldr_en": "The paper proposes a stochastic optimization framework for football performance, modeling it as an efficiency-driven production process under uncertainty, with a latent efficiency variable evolving via stochastic differential equations. It derives the HJB equation, characterizes optimal investment policy, and proves a verification theorem. The efficiency measure links to stochastic frontier and DEA, contributing a novel efficiency measurement method for sports.",
+      "llm_tldr_cn": "本文针对传统效率测量方法难以处理足球表现中动态不确定性和投资决策的问题，提出随机优化框架，将足球表现视为效率驱动的生产过程。模型包含经济投入、按随机微分方程演化的潜在效率变量，以及代表体育发展投资的控制变量。通过求解Hamilton-Jacobi-Bellman方程刻画最优投资策略，并证明验证定理。该效率度量与随机前沿分析及数据包络分析建立了联系，为体育效率分析提供了新的理论工具。",
+      "llm_tldr": "本文针对传统效率测量方法难以处理足球表现中动态不确定性和投资决策的问题，提出随机优化框架，将足球表现视为效率驱动的生产过程。模型包含经济投入、按随机微分方程演化的潜在效率变量，以及代表体育发展投资的控制变量。通过求解Hamilton-Jacobi-Bellman方程刻画最优投资策略，并证明验证定理。该效率度量与随机前沿分析及数据包络分析建立了联系，为体育效率分析提供了新的理论工具。",
+      "llm_tags": [
+        "query:ml-dea"
+      ],
+      "matched_query_tag": "query:ml-dea",
+      "matched_query_text": "data envelopment analysis efficiency measurement",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}
