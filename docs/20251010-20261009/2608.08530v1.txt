@@ -1,0 +1,602 @@
+Title: A Unified Maximum-Margin Framework for Data Envelopment Analysis: Theoretical Foundations and Numerical Evidence
+
+URL Source: https://arxiv.org/pdf/2608.08530v1
+
+Published Time: Tue, 11 Aug 2026 01:09:01 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# A Unified Maximum-Margin Framework for Data Envelopment Analysis: Theoretical Foundations and Numerical Evidence ∗
+
+Teruki Akahoshi †, Hiroki Ueda ‡ and Tomonari Kitahara §
+
+Abstract 
+
+Data Envelopment Analysis (DEA) is a widely used non-parametric method for evaluat-ing the relative efficiency of decision-making units (DMUs). However, the classic Charnes-Cooper-Rhodes (CCR) model often suffers from a lack of discriminatory power, particularly when the number of input and output variables is large relative to the number of DMUs. Under such conditions, many DMUs are evaluated as “CCR-efficient” with a score of unity, making it difficult to rank or distinguish between top performers. To address this limi-tation, we propose a novel Maximum-Margin DEA (MM-DEA) model that integrates the concept of “margin maximization”—inspired by structural risk minimization in machine learning—directly into the efficiency measurement framework. Like the traditional super-efficiency model, the proposed MM-DEA model excludes the target DMU from the reference set used to evaluate it; unlike the super-efficiency model, however, MM-DEA imposes an ex-plicit upper bound on the target DMU’s own score, ensuring that every score remains within the standard [0 , 1] range rather than potentially exceeding one. We theoretically demonstrate that the MM-DEA model is a generalized extension of the CCR model, reducing to the latter when the trade-off parameter α is zero. Furthermore, we show that the fractional program-ming formulation of MM-DEA can be rigorously transformed into a linear programming (LP) problem, ensuring computational efficiency. In our numerical experiments, MM-DEA produced a unique ranking for a high-dimensional synthetic dataset on which the CCR model failed to discriminate among any of the DMUs. Our results suggest that the “margin” serves as a critical metric for managerial resilience and competitive advantage. 
+
+# 1 Introduction 
+
+Data Envelopment Analysis (DEA), first proposed by Charnes, Cooper, and Rhodes [2], has become a standard non-parametric tool for evaluating the relative efficiency of Decision Making Units (DMUs). By measuring the ratio of weighted outputs to weighted inputs, the classic CCR model identifies an “efficiency frontier” consisting of units that achieve the maximum possible performance relative to their peers. Despite its widespread application, the CCR model faces a critical limitation in practical decision-making: the lack of discriminatory power. This issue, often referred to as the “dimen-sionality crisis,” occurs when the number of input and output variables is large relative to the number of DMUs. In such scenarios, a disproportionately high number of DMUs are evaluated as “CCR-efficient” with a score of unity. This saturation of efficient units prevents meaningful ranking and differentiation, significantly diminishing the model’s utility as a decision-support 
+
+> ∗
+
+This work was inspired by the paper [7], which was written under the supervision of the third author. 
+
+> †
+
+Joint Graduate School of Mathematics for Innovation, Kyushu University, Fukuoka 819-0395, Japan. E-mail: akahoshi.teruki.505@s.kyushu-u.ac.jp 
+
+> ‡
+
+Former Affiliation: Joint Graduate School of Mathematics for Innovation, Kyushu University. E-mail: hkt.hkt.fhs.kyushu@gmail.com 
+
+> §
+
+Faculty of Economics, Kyushu University, Fukuoka 819-0395, Japan. E-mail: tomonari.kitahara@econ.kyushu-u.ac.jp 
+
+1arXiv:2608.08530v1 [math.OC] 9 Aug 2026 tool. To address this challenge, several ranking methods have been developed, most notably the super-efficiency model proposed by Andersen and Petersen [1]; alternative approaches address-ing some of its drawbacks have also been proposed (e.g., [6]). By excluding the target unit from its own reference set, this model allows scores to exceed one, which resolves ties among CCR-efficient DMUs; however, this mechanism also means the model does not reduce to the CCR model and departs from the standard [0 , 1] range of efficiency scores. In this paper, we propose a novel framework called Maximum-Margin DEA (MM-DEA). Inspired by the principle of structural risk minimization in Support Vector Machines (SVM), our model redefines efficiency not just as reaching the frontier, but as maintaining a “safety margin” over competing DMUs. Unlike traditional ranking methods, MM-DEA incorporates this margin directly into a single-stage optimization objective. The contributions of this research are three-fold: 1. Theoretical Innovation : We introduce the concept of “margin maximization” into DEA, providing a robust metric for efficiency that accounts for competitive lead. 2. Computational Tractability : We demonstrate that the MM-DEA formulation can be rigorously transformed into a linear programming (LP) problem, ensuring that it remains as computationally efficient as the standard CCR model. 3. Numerical Validation : Through numerical experiments on synthetic datasets, we illus-trate that MM-DEA can yield a stable and unique ranking in a setting where the CCR model fails to discriminate. The remainder of this paper is organized as follows. Section 2 reviews the theoretical back-ground of the CCR model and its limitations. Section 3 presents the formal definition and LP transformation of the MM-DEA model. Section 4 evaluates the model’s performance through numerical experiments on synthetic data. Finally, Section 5 concludes the paper with a discus-sion on future research directions. 
+
+# 2 Preliminary: The CCR Model 
+
+In this section, we briefly review the standard Charnes-Cooper-Rhodes (CCR) model and discuss the inherent limitations regarding its discriminatory power. 
+
+2.1 Mathematical Formulation 
+
+Suppose there are n decision making units (DMUs). We use I to represent the set {1, . . . , n }.For i ∈ I, the i-th DMU has l inputs x1i, . . . , x li and m outputs y1i, . . . , y mi . From these inputs and outputs, we define the input vector 
+
+xi = ( x1i, . . . , x li )⊤
+
+and the output vector 
+
+yi = ( y1i, . . . , y mi )⊤.
+
+We also define the matrix X which consists of the input vectors as 
+
+X = [ x1, x2, . . . , xn]2and the matrix Y consisting of the output vectors 
+
+Y = [ y1, y2, . . . , yn].
+
+Throughout this paper, we assume that all inputs and outputs are strictly positive, i.e., xi > 0
+
+and yi > 0 for every i ∈ I.Suppose we want to measure the efficiency of the o-th DMU ( o ∈ I). In DEA, we measure the efficiency of the o-th DMU by the ratio 
+
+y⊤ 
+
+> o
+
+vx⊤ 
+
+> o
+
+u
+
+where u ∈ Rl 
+
+> +
+
+and v ∈ Rm 
+
+> +
+
+are weight vectors. Under the CCR model, we seek nonnegative weights u and v that maximize the efficiency of the o-th DMU subject to the efficiency of each DMU being not more than one. To be precise, the problem max θo = y⊤ 
+
+> o
+
+vx⊤ 
+
+> o
+
+u
+
+subject to y⊤ 
+
+> i
+
+vx⊤ 
+
+> i
+
+u ≤ 1, ∀i ∈ I
+
+u ≥ 0, v ≥ 0
+
+(1) is solved to find nonnegative weights u and v. This model is proposed by Charnes, Cooper and Rhodes in 1978. For a comprehensive treatment of DEA methodology, see [3]. Note that the ratio y⊤ 
+
+> i
+
+vx⊤ 
+
+> i
+
+u is unchanged if we multiply u and v by some constant. Thus we can assume x⊤ 
+
+> o
+
+u = 1. Then we can rewrite (1) to the following linear programming problem (LP). max θo = y⊤ 
+
+> o
+
+v
+
+subject to x⊤ 
+
+> o
+
+u = 1 
+
+y⊤ 
+
+> i
+
+v ≤ x⊤ 
+
+> i
+
+u, ∀i ∈ I
+
+u ≥ 0, v ≥ 0
+
+This problem can be expressed in a compact matrix form as follows: max θo = y⊤ 
+
+> o
+
+v
+
+subject to x⊤ 
+
+> o
+
+u = 1 
+
+Y T v ≤ XT uu ≥ 0, v ≥ 0
+
+(2) The optimal value θ∗ 
+
+> o
+
+of (2) is called the CCR efficiency score of the o-th DMU. If θ∗ 
+
+> o
+
+= 1, the o-th DMU is said to be CCR-efficient, otherwise it is said to be CCR-inefficient. 
+
+2.2 The Discrimination Problem 
+
+A fundamental property of the CCR model is that it evaluates efficiency from the most favorable perspective for each DMU. While this “optimistic” evaluation is a strength in identifying the efficiency frontier, it frequently leads to a lack of discriminatory power. When the number of variables ( l + m) is large relative to the number of DMUs ( n), many units are able to find a set of weights that place them on the frontier, resulting in an efficiency score of exactly 1.0. These units are all categorized as “efficient”, yet the model provides no information regarding which among them is performing superiorly. This “saturation” of the frontier complicates the ranking process and limits the model’s effectiveness in providing actionable managerial insights. To overcome this, it is necessary to introduce a metric that measures the “strength” of a DMU’s efficiency—a concept we define as the margin .32.3 Super-Efficiency Model 
+
+To address the discrimination problem described above, Andersen and Petersen [1] proposed the super-efficiency (SE) model, which ranks CCR-efficient DMUs by excluding the target unit from its own reference set. When evaluating DMU o, the efficiency frontier is reconstructed using only the remaining units ( j̸ = o). If DMU o sufficiently outperforms this reduced peer group, it lies beyond the reconstructed frontier and receives a score greater than one. Following the notation of Section 2.1, the input-oriented CCR super-efficiency score θsuper 
+
+> o
+
+for DMU o is obtained by solving maximize θsuper  
+
+> o
+
+= y⊤ 
+
+> o
+
+v
+
+subject to x⊤ 
+
+> o
+
+u = 1 ,Y ⊤−ov ≤ X⊤−ou,
+
+u ≥ 0, v ≥ 0,
+
+where X−o and Y−o denote the input and output matrices with the o-th column removed. Aside from this exclusion, the formulation is identical to the CCR model (2). This self-exclusion mechanism has two consequences for the properties of the SE model. First, because the reference set is altered for each target unit, the SE model’s feasible region differs from that of the CCR model; the SE model doesn’t reduce to the CCR model (see also [4] for a related discussion of how excluding the target DMU alters the reference set in the envelopment form of DEA). Second, since θsuper  
+
+> o
+
+can exceed one, the SE score no longer carries the [0 , 1] interpretation of the standard efficiency ratio in (2). These two points motivate the design of the MM-DEA model introduced in Section 3. As we show in Section 3.3, MM-DEA’s dual problem excludes the target unit from the reference set in the same way as the SE model formulated above does; the two models differ in that MM-DEA additionally imposes an explicit constraint bounding the target DMU’s own score by one, which both restores the reduction to the CCR model when α = 0 (Proposition 3.1) and guarantees that every MM-DEA score lies within [0 , 1]. 
+
+# 3 Proposed Model: Maximum-Margin DEA 
+
+In this section, we present the formal development of the Maximum-Margin DEA (MM-DEA) model. The proposed model integrates the concept of “margin maximization” into the efficiency measurement framework to resolve the discrimination problem inherent in the CCR model. 
+
+3.1 Conceptual Framework 
+
+As discussed in Section 2, the CCR model identifies a unit as efficient if it lies on the frontier, regardless of its distance from other performers. To introduce a metric for robust efficiency, we define a “safety margin” t. By this margin t, we bound the efficiency of other DMUs less than or equal to 1 − t. Drawing inspiration from the Structural Risk Minimization principle in Support Vector Machines (SVM), we aim to find a set of weights that not only maximize the efficiency of the target unit but also maximize its separation from the nearest competing units. We introduce a trade-off parameter α ≥ 0, which balances the pursuit of absolute efficiency with the maximization of the margin. Thus we try to make the objective function θo + αt as large as possible, while maintaining θo less than or equal to 1 and the efficiency of other DMUs less than or equal to 1 − t. Thus the MM-DEA model is initially formulated as the following fractional 4programming problem: maximize θo + αt 
+
+subject to θo = y⊤ 
+
+> o
+
+vx⊤ 
+
+> o
+
+u ,θo ≤ 1,
+
+y⊤ 
+
+> i
+
+vx⊤ 
+
+> i
+
+u ≤ 1 − t, ∀i ∈ I \ { o},
+
+u ≥ 0, v ≥ 0,
+
+0 ≤ t ≤ 1.
+
+(3) The upper bound t ≤ 1 ensures that the bound 1 − t on competing DMUs remains nonnegative, while the lower bound t ≥ 0 ensures that this bound does not exceed 1, so that the margin con-straint on competing DMUs is never looser than the original CCR bound of 1. When α = 0, the objective reduces to the standard CCR maximization, ensuring that MM-DEA is a generalized extension of the classical model. 
+
+3.2 Transformation to Linear Programming 
+
+To ensure computational tractability, we transform the fractional programming problem (3) into an equivalent Linear Programming (LP) problem. Note that the technique used in this subsection is originally developed in [5]. First, as in the standard CCR model, we can assume 
+
+x⊤ 
+
+> o
+
+u = 1 ,
+
+without loss of generality. Next, we pose 
+
+t′ = 1 − t. 
+
+Then 0 ≤ t′ ≤ 1 and we can rewrite the inequalities for non-target DMUs as 
+
+y⊤ 
+
+> i
+
+v ≤ (xi)⊤(t′u), ∀i̸ = o. 
+
+Thus we can transform the problem (3) to the following problem. maximize y⊤ 
+
+> o
+
+v + α(1 − t′)subject to x⊤ 
+
+> o
+
+u = 1 ,
+
+y⊤ 
+
+> o
+
+v ≤ 1,
+
+y⊤ 
+
+> i
+
+v ≤ x⊤ 
+
+> i
+
+(t′u), ∀i ∈ I \ { o},
+
+u ≥ 0, v ≥ 0,
+
+0 ≤ t′ ≤ 1.
+
+(4) Since α is a predetermined constant, the additive term α in the objective function does not affect the optimal solution and can therefore be omitted. Finally, by introducing the variable transformation u′ = t′u, problem (4) is reduced to the following linear programming (LP) formulation: maximize y⊤ 
+
+> o
+
+v − αt ′
+
+subject to x⊤ 
+
+> o
+
+u′ = t′,
+
+y⊤ 
+
+> o
+
+v ≤ 1,
+
+y⊤ 
+
+> i
+
+v ≤ x⊤ 
+
+> i
+
+u′, ∀i ∈ I \ { o},
+
+u′ ≥ 0, v ≥ 0,
+
+0 ≤ t′ ≤ 1.
+
+(5) Before proceeding, we note that the optimal value of (5) always lies in [0 , 1]. Indeed, the trivial solution ( u′ = 0, v = 0, t ′ = 0) is always feasible and yields an objective value of 0, so the optimal value is at least 0; moreover, constraint y⊤ 
+
+> o
+
+v ≤ 1 together with α ≥ 0 and t′ ≥ 0gives y⊤ 
+
+> o
+
+v − αt ′ ≤ 1, so the optimal value is at most 1. This confirms that, unlike the SE model, every MM-DEA score retains the standard [0 , 1] interpretation. 5Proposition 3.1. When α = 0 , the MM-DEA model (5) reduces to the CCR model (2). Proof. Suppose α = 0. We refer to the constraints of (5) as follows: (C1) x⊤ 
+
+> o
+
+u′ = t′,
+
+(C2) y⊤ 
+
+> o
+
+v ≤ 1,
+
+(C3) y⊤ 
+
+> i
+
+v ≤ x⊤ 
+
+> i
+
+u′, ∀i ∈ I \ { o}.
+
+We show that, without loss of generality, we may restrict attention to feasible solutions of (5) with t′ = 1. We consider the cases t′ = 0 and t′ > 0 separately. 
+
+Case t′ = 0 . Let ( u′, v, t ′) be any feasible solution of (5). Since we will show below that every feasible solution with t′ > 0 can be normalized to one with t′ = 1 without decreasing the ob-jective value, it suffices to check that any value attainable with t′ = 0 is also attainable among solutions with t′ = 1; this shows that solutions with t′ = 0 may be ignored when computing the optimal value of (5). If t′ = 0, then (C1) together with xo > 0 and u′ ≥ 0 forces u′ = 0. Then (C3) gives 
+
+y⊤ 
+
+> i
+
+v ≤ 0 for all i ∈ I \ { o}, and since yi > 0 and v ≥ 0, we obtain v = 0; combined with 
+
+u′ = 0, this shows that t′ = 0 admits the unique feasible solution ( u′, v, t ′) = ( 0, 0, 0), whose objective value is zero. It remains to exhibit a feasible solution with t′ = 1 attaining objective value zero. Taking any ¯ u ≥ 0 with x⊤ 
+
+> o
+
+¯u = 1, the point ( u′ = ¯ u, v = 0, t ′ = 1) is feasible for (5)—(C1) holds since x⊤ 
+
+> o
+
+¯u = 1, (C2) holds trivially, and (C3) holds since y⊤ 
+
+> i
+
+0 = 0 ≤ x⊤ 
+
+> i
+
+¯u
+
+for ¯ u ≥ 0, xi > 0—and also attains objective value zero. Hence the value 0 obtained when 
+
+t′ = 0 does not exceed the value attainable with t′ = 1, so solutions with t′ = 0 may be ignored in what follows. 
+
+Case t′ > 0. Let ( u′, v, t ′) be any feasible solution of (5) with t′ > 0. Define ˆu′ = u′
+
+t′ , ˆv = v.
+
+We verify that (ˆ u′, ˆv, 1) is feasible for (5). (C1) is satisfied since x⊤ 
+
+> o
+
+ˆu′ = 1 
+
+> t′
+
+x⊤ 
+
+> o
+
+u′ = t′ 
+
+> t′
+
+= 1. (C2) holds because y⊤ 
+
+> o
+
+ˆv = y⊤ 
+
+> o
+
+v ≤ 1. For each i ∈ I \ { o}, (C3) is satisfied since 
+
+y⊤ 
+
+> i
+
+ˆv = y⊤ 
+
+> i
+
+v ≤ x⊤ 
+
+> i
+
+u′ ≤ 1
+
+t′ x⊤ 
+
+> i
+
+u′ = x⊤ 
+
+> i
+
+ˆu′,
+
+where the first inequality follows from the feasibility of ( u′, v, t ′) and the second from t′ ≤ 1, which implies 1 /t ′ ≥ 1. Finally, t′ = 1 satisfies 0 ≤ t′ ≤ 1. Moreover, the objective value is unchanged: y⊤ 
+
+> o
+
+ˆv = y⊤ 
+
+> o
+
+v. Hence any feasible solution with t′ > 0 can be replaced by a feasible solution with t′ = 1 having the same objective value. In either case, therefore, the optimal value of (5) with α = 0 is attained at t′ = 1. Setting t′ = 1 in (5) with α = 0 yields maximize y⊤ 
+
+> o
+
+v
+
+subject to x⊤ 
+
+> o
+
+u′ = 1 ,
+
+y⊤ 
+
+> o
+
+v ≤ 1,
+
+y⊤ 
+
+> i
+
+v ≤ x⊤ 
+
+> i
+
+u′, ∀i ∈ I \ { o},
+
+u′ ≥ 0, v ≥ 0.
+
+Note that (C3) is stated only for i ∈ I \ { o}; however, the inequality obtained by formally extending it to i = o, namely y⊤ 
+
+> o
+
+v ≤ x⊤ 
+
+> o
+
+u′, holds automatically here, since x⊤ 
+
+> o
+
+u′ = 1 by the first constraint and y⊤ 
+
+> o
+
+v ≤ 1 by the second. Thus this problem is identical to the CCR model (2). 63.3 Dual Problem 
+
+The dual problem of the MM-DEA model (5) provides an alternative geometric interpretation of efficiency evaluation. By associating dual variables ξ, τ , λ−o, and γ with the constraints of (5), the dual problem is derived as follows: minimize τ + γ
+
+subject to Y−oλ−o ≥ (1 − τ )yo,X−oλ−o ≤ ξxo,ξ ≤ α + γ, τ ≥ 0, γ ≥ 0, λ−o ≥ 0.
+
+(6) where ξ ∈ R, τ ∈ R, γ ∈ R, and λ−o ∈ Rn−1 are variables, λ−o is the vector of reference weights for the DMUs other than the o-th DMU, and Y−o ∈ Rm×(n−1) and X−o ∈ Rl×(n−1) denote the output and input matrices with the o-th DMU excluded, respectively. To interpret this formulation, it is instructive to compare it with the dual of the standard CCR model (2): minimize θ
+
+subject to Y λ ≥ yo,Xλ ≤ θxo,
+
+λ ≥ 0.
+
+where θ ∈ R and λ ∈ Rn are variables. In the CCR dual, λ represents the weights of a reference set of all DMUs, and the model seeks the minimum efficiency score θ such that the reference set can replicate the output of the o-th DMU using no more than θ times its input. The MM-DEA dual retains this basic structure but introduces several notable differences, which we now discuss in turn. First, the target o-th DMU is excluded from the reference set (i.e., Y−o and X−o instead of 
+
+Y and X, and λ−o ∈ Rn−1 instead of λ ∈ Rn), the same exclusion structure as the SE model in Section 2.3. Furthermore, the objective function τ + γ plays the role of θ in the CCR dual: it represents the MM-DEA evaluation score of the o-th DMU, as confirmed by strong duality. In the follow-ing, an asterisk is used as a superscript to denote an optimal solution. By the complementary slackness conditions for the primal constraints y⊤ 
+
+> o
+
+v∗ ≤ 1 and t′∗ ≤ 1, we have τ ∗(1 − y⊤ 
+
+> o
+
+v∗) = 0 and γ∗(1 − t′∗ ) = 0. In particular, whenever a positive margin is achieved at optimality ( t′∗ < 1), the latter condition forces γ∗ = 0, so that the evaluation score τ ∗ + γ∗ reduces to τ ∗ alone. In addition, the constraint Y−oλ−o ≥ (1 −τ )yo requires the reference set to achieve an output level of (1 − τ )yo rather than the full yo as in the CCR dual. Since γ∗ ≥ 0, strong duality gives 1 − τ ∗ ≥ 1 − (τ ∗ + γ∗) = 1 − y⊤ 
+
+> o
+
+v∗ + αt ′∗ ≥ αt ′∗ ,
+
+where the last inequality uses y⊤ 
+
+> o
+
+v∗ ≤ 1. Thus the required output level (1 − τ ∗)yo is always bounded below by αt ′∗ yo, and this lower bound decreases as the margin t grows (equivalently, as t′ = 1 − t decreases), meaning that a DMU with a larger margin faces a less demanding lower bound on the output the reference set must achieve in the dual. In particular, this bound is attained with equality when t′∗ < 1 and τ ∗ > 0 simultaneously hold at optimality. Indeed, t′∗ < 1 forces γ∗ = 0 via the complementary slackness condition 
+
+γ∗(1 − t′∗ ) = 0, so that strong duality reduces to τ ∗ = y⊤ 
+
+> o
+
+v∗ − αt ′∗ ; and τ ∗ > 0 forces y⊤ 
+
+> o
+
+v∗ = 1 via the complementary slackness condition τ ∗(1 − y⊤ 
+
+> o
+
+v∗) = 0. Combining these two facts yields 71 − τ ∗ = αt ′∗ exactly. Finally, the constraints X−oλ−o ≤ ξxo and ξ ≤ α + γ together limit the input scaling of the reference set to at most α + γ times the input of the o-th DMU. This parallels the role of θ in the CCR dual, but with the upper bound α + γ controlled by the trade-off parameter α and the dual variable γ. A larger α places greater emphasis on margin maximization in the primal, which in the dual corresponds to allowing the reference set more input resources. 
+
+# 4 Computational Experiments with Synthetic Data 
+
+In this section, we investigate the fundamental properties of the MM-DEA model through nu-merical experiments on two synthetic datasets of increasing dimensionality. The first is a simple, geometrically transparent setting with nine DMUs and a single input, designed to illustrate how the margin resolves ties among CCR-efficient units and to visualise how scores evolve as α
+
+increases. The second mimics a high-dimensional setting in which the CCR model saturates entirely, and serves to demonstrate that MM-DEA can provide a complete and stable ranking even in this extreme case. 
+
+4.1 Experiment 1: Single-Input Setting 
+
+Table 1 presents a dataset of nine DMUs (A–I), each consuming one unit of input and producing two outputs. The CCR model identifies four units—A, C, H, and I—as efficient, all receiving a score of 1.0000; the remaining five are evaluated below unity (Table 1). Since all four efficient units are assigned the same score, the CCR model cannot rank them. Table 1: Synthetic dataset 1: inputs, outputs, and CCR efficiency scores DMU A B C D E F G H IInput x 1 1 1 1 1 1 1 1 1Output y1 1 2 3 4 4 5 6 7 8Output y2 10 6 9 7 5 3 5 6 2CCR 1.0000 0.6667 1.0000 0.8889 0.7111 0.6765 0.8529 1.0000 1.0000 Table 2 reports the MM-DEA scores for several values of α. At α = 0 the scores coincide with those of the CCR model, in accordance with Proposition 3.1. As α increases from zero, the scores decrease monotonically for every DMU, and the four previously tied efficient units receive distinct values. At α = 0 .1, for instance, they are ranked H > I > A > C with scores 0 .9152, 0.9125, 0 .9100, and 0 .9030, respectively. This ordering reflects the competitive lead each unit maintains over the remaining DMUs—a quantity that the CCR model, by construction, cannot capture. Figure 1 provides a visual summary of these results. Panel (a) traces the MM-DEA score as a function of α for the four CCR-efficient units together with two representative inefficient units. The efficient units (A, C, H, I) start at 1 .0000 when α = 0 and decrease at differing rates, illustrating how the margin can distinguish competitive positions that are indistinguishable to the CCR model. Panel (b) compares the CCR and MM-DEA ( α = 0 .1) scores side by side; the hatched bars highlight the four CCR-efficient units, whose scores are clearly differentiated by the MM-DEA model. 
+
+4.2 Experiment 2: High-Dimensional Setting 
+
+To examine the model’s behaviour in a higher-dimensional setting, we consider ten DMUs with four inputs and four outputs each (Table 3). When the number of input and output variables 80.00 0.25 0.50 0.75 1.00 1.25 1.50 1.75 2.00            
+
+> Trade-off parameter
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> MM-DEA Score
+> (a) Score vs. : selected DMUs
+> DMU A DMU C DMU H DMU I DMU B (CCR-ineff.) DMU G (CCR-ineff.) ABCDEFGHI
+> DMU
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Score (b) Scores at = 0.1
+> CCR MM-DEA ( = 0.1 )
+> CCR-efficient MM-DEA best
+
+Figure 1: Experiment 1: (a) MM-DEA score as a function of α for four CCR-efficient units (A, C, H, I) and two CCR-inefficient units (B, G); (b) side-by-side CCR and MM-DEA scores at 
+
+α = 0 .1 (hatched bars: CCR-efficient units; single hatched bar: MM-DEA best performer). Table 2: CCR and MM-DEA scores — Experiment 1 DMU A B C D E F G H ICCR 1.0000 0.6667 1.0000 0.8889 0.7111 0.6765 0.8529 1.0000 1.0000 
+
+α = 0 1.0000 0.6667 1.0000 0.8889 0.7111 0.6765 0.8529 1.0000 1.0000 
+
+α = 0 .1 0.9100 0.5667 0.9030 0.7889 0.6111 0.5765 0.7529 0.9152 0.9125 
+
+α = 0 .3 0.7300 0.3667 0.7091 0.5889 0.4111 0.3765 0.5529 0.7457 0.7375 
+
+α = 0 .5 0.5500 0.1667 0.5152 0.3889 0.2111 0.1765 0.3529 0.5761 0.5625 
+
+α = 0 .7 0.3700 0.0000 0.3212 0.1889 0.0111 0.0000 0.1529 0.4065 0.3875 
+
+α = 1 .0 0.1000 0.0000 0.0303 0.0000 0.0000 0.0000 0.0000 0.1522 0.1250 
+
+α = 2 .0 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 is large relative to the number of DMUs, the CCR model suffers from a lack of discriminatory power. In this example, all ten DMUs are evaluated as CCR-efficient with a score of 1.0000 (Table 3), and therefore the CCR model fails to provide any meaningful ranking among them. Applying MM-DEA with α = 0 .1 yields ten distinct scores and thus a complete ranking of the DMUs (Table 3). The results are consistent with the model’s role as a generalisation of the CCR model: at α = 0 all scores equal 1.0000, consistent with Proposition 3.1, while in this example a small positive α already suffices to resolve all ties. Figure 2 visualises the outcome for Experiment 2. Panel (a) traces the MM-DEA score as a function of α for five representative DMUs. The gap between top and bottom performers widens as α grows, demonstrating that a larger margin parameter imposes a progressively stricter efficiency evaluation and thereby amplifies the discriminatory power of the model. Panel (b) displays the ten DMUs sorted in descending order of their MM-DEA scores at α = 0 .1, revealing a clear hierarchy that is entirely invisible to the CCR model. 
+
+4.3 Discussion 
+
+The results from both synthetic experiments illustrate how the MM-DEA model can alleviate the “saturation” problem of the CCR efficiency frontier. By incorporating the margin maximisation term, the model provides a more nuanced evaluation that rewards DMUs not just for being efficient, but for being robustly efficient—that is, for maintaining a significant competitive lead over the reference set. 9Table 3: Synthetic dataset 2: inputs, outputs, and efficiency scores DMU DMU1 DMU2 DMU3 DMU4 DMU5 DMU6 DMU7 DMU8 DMU9 DMU10 Input 1 5 3 2 8 10 4 9 1 8 3Input 2 5 8 2 3 6 8 3 4 2 10 Input 3 7 7 10 2 8 7 5 5 7 2Input 4 2 7 7 8 2 8 4 9 7 7Output 1 4 1 2 7 10 5 7 5 7 8Output 2 2 9 10 6 3 9 8 9 4 1Output 3 7 7 3 3 1 9 2 4 5 1Output 4 2 1 6 1 9 9 9 1 8 5CCR 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 
+
+α = 0 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 
+
+α = 0 .1 0.9679 0.9075 0.9601 0.9540 0.9627 0.9471 0.9452 0.9680 0.9518 0.9610 0.25 0.50 0.75 1.00 1.25 1.50 1.75 2.00         
+
+> Trade-off parameter
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> MM-DEA Score
+> (a) Score vs. : selected DMUs
+> DMU8 DMU1 DMU5 DMU2 DMU7 DMU8 DMU1 DMU5 DMU10 DMU3 DMU4 DMU9 DMU6 DMU7 DMU2
+> DMU (sorted by MM-DEA score)
+> 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98
+> MM-DEA Score
+> 0.9680 0.9679 0.9627 0.9610 0.9601 0.9540 0.9518 0.9471 0.9452 0.9075
+> (b) Scores at = 0.1 (sorted)
+
+Figure 2: Experiment 2: (a) MM-DEA score as a function of α for five selected DMUs; (b) MM-DEA scores at α = 0 .1 sorted in descending order (all CCR scores equal 1.0000). A notable observation in these two examples is that even a small value of α (e.g., α = 0 .1) was enough to break all ties among CCR-efficient units in both datasets, while preserving the relative ordering of CCR-inefficient units. For applications requiring a finer sensitivity to competitive margins, larger values of α may be employed, at the cost of reducing the absolute score for all DMUs. 
+
+# 5 Conclusion 
+
+In this paper, we proposed the Maximum-Margin DEA (MM-DEA) model as a novel framework to enhance the discriminatory power of efficiency analysis. By integrating the concept of “mar-gin maximization”—a core principle in Structural Risk Minimization—directly into the DEA objective function, we provided a mechanism that can rank Decision Making Units (DMUs) that are indistinguishable under the standard CCR model. Our theoretical analysis demonstrated that the MM-DEA model is a generalized extension of the CCR model, reducing to it when the trade-off parameter α is set to zero. Furthermore, we showed that the initial fractional programming formulation can be rigorously transformed into a linear programming problem through a specialized variable transformation, ensuring compu-tational efficiency for practical applications. The numerical experiments on two synthetic datasets illustrate the potential of the proposed 10 model. In both examples, MM-DEA differentiated among CCR-efficient units by rewarding those that maintain a significant competitive lead (margin) over their peers. This provides decision-makers with a ranking tool whose scores retain the familiar [0 , 1] interpretation of the CCR model, in contrast to the super-efficiency model, whose scores can exceed one. Despite these contributions, several avenues for future research remain. First, the system-atic determination of the optimal trade-off parameter α remains an open question; future work could explore data-driven approaches, such as cross-validation, to select α based on the specific characteristics of the dataset. Second, while this study focused on the CCR model, the margin maximization framework could be extended to other DEA variants, including the BCC model for variable returns to scale or Slack-Based Measure (SBM) models. Finally, a more rigorous theoretical comparison between MM-DEA and Andersen-Petersen super-efficiency models would further clarify the mathematical conditions under which these rankings converge or diverge. In conclusion, the MM-DEA model represents a significant step toward more precise effi-ciency measurement, bridging the gap between mathematical optimization and robust manage-rial decision-making. 
+
+# References 
+
+[1] Andersen, P., and Petersen, N.C. A Procedure for Ranking Efficient Units in Data Envel-opment Analysis. Management Science , 39, 1261-1264 (1993). [2] Charnes, A., Cooper, W.W., and Rhodes, E. Measuring the Efficiency of Decision Making Units. European Journal of Operations Research , 2, 429-444 (1978). [3] Cooper, W.W., Seiford, L.M., and Tone, K. A Comprehensive Text with Models, Applica-tions, References and DEA-Solver Software. Springer New York, NY (2007). [4] Dul´ a, J.H. and Hickman, B.L. Effects of excluding the column being scored from the DEA envelopment LP technology matrix. Journal of the Operational Research Society , 48, 1001-1012 (2017). [5] Kitahara, T. and Tsuchiya, T. Enhancing Top Efficiency by Minimizing Second-Best Scores: A Novel Perspective on Super Efficiency Models in DEA, arXiv:2411.00438v1 (2024). [6] Mehrabian, S., Alirezaee, M.R. and Jahanshahloo, G.R. A Complete Efficiency Ranking of Decision Making Units in Data Envelopment Analysis. Computational Optimization and Applications 14, 261–266 (1999). [7] Ueda, H., Development and Analysis of a Maximum-Margin DEA Model for Refining Ef-ficiency Scores (in Japanese). Master thesis, Joint Graduate School of Mathematics for Innovation, Kyushu University (2026). 11

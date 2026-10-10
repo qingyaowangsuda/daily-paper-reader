@@ -1,0 +1,39 @@
+{
+  "label": "2025-10-10 ～ 2026-10-09",
+  "date": "2025-10-10 ~ 2026-10-09",
+  "generated_at": "2026-10-10T02:27:35",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "20251010-20261009/2608.08530v1",
+      "section": "quick",
+      "title_en": "A Unified Maximum-Margin Framework for Data Envelopment Analysis: Theoretical Foundations and Numerical Evidence",
+      "authors": "Teruki Akahoshi, Hiroki Ueda, Tomonari Kitahara",
+      "date": "2026-08-09",
+      "pdf": "https://arxiv.org/pdf/2608.08530v1",
+      "score": "8",
+      "evidence": "",
+      "tldr": "",
+      "tags": "query:ml-dea",
+      "abstract_en": "Data Envelopment Analysis (DEA) is a widely used non-parametric method for evaluating the relative efficiency of decision-making units (DMUs). However, the classic Charnes-Cooper-Rhodes (CCR) model often suffers from a lack of discriminatory power, particularly when the number of input and output variables is large relative to the number of DMUs. Under such conditions, many DMUs are evaluated as \"CCR-efficient\" with a score of unity, making it difficult to rank or distinguish between top performers. To address this limitation, we propose a novel Maximum-Margin DEA (MM-DEA) model that integrates the concept of \"margin maximization\" -- inspired by structural risk minimization in machine learning -- directly into the efficiency measurement framework. Like the traditional super-efficiency model, the proposed MM-DEA model excludes the target DMU from the reference set used to evaluate it; unlike the super-efficiency model, however, MM-DEA imposes an explicit upper bound on the target DMU's own score, ensuring that every score remains within the standard $[0,1]$ range rather than potentially exceeding one. We theoretically demonstrate that the MM-DEA model is a generalized extension of the CCR model, reducing to the latter when the trade-off parameter $α$ is zero. Furthermore, we show that the fractional programming formulation of MM-DEA can be rigorously transformed into a linear programming (LP) problem, ensuring computational efficiency. In our numerical experiments, MM-DEA produced a unique ranking for a high-dimensional synthetic dataset on which the CCR model failed to discriminate among any of the DMUs. Our results suggest that the \"margin\" serves as a critical metric for managerial resilience and competitive advantage.",
+      "source": "arxiv",
+      "selection_source": "long-range"
+    },
+    {
+      "paper_id": "20251010-20261009/2603.16729v1",
+      "section": "quick",
+      "title_en": "GeMA: Learning Latent Manifold Frontiers for Benchmarking Complex Systems",
+      "authors": "Jia Ming Li, Anupriya, Daniel J. Graham",
+      "date": "2026-03-17",
+      "pdf": "https://arxiv.org/pdf/2603.16729v1",
+      "score": "8",
+      "evidence": "",
+      "tldr": "",
+      "tags": "query:ml-dea",
+      "abstract_en": "Benchmarking the performance of complex systems such as rail networks, renewable generation assets and national economies is central to transport planning, regulation and macroeconomic analysis. Classical frontier methods, notably Data Envelopment Analysis (DEA) and Stochastic Frontier Analysis (SFA), estimate an efficient frontier in the observed input-output space and define efficiency as distance to this frontier, but rely on restrictive assumptions on the production set and only indirectly address heterogeneity and scale effects. We propose Geometric Manifold Analysis (GeMA), a latent manifold frontier framework implemented via a productivity-manifold variational autoencoder (ProMan-VAE). Instead of specifying a frontier function in the observed space, GeMA represents the production set as the boundary of a low-dimensional manifold embedded in the joint input-output space. A split-head encoder learns latent variables that capture technological structure and operational inefficiency. Efficiency is evaluated with respect to the learned manifold, endogenous peer groups arise as clusters in latent technology space, a quotient construction supports scale-invariant benchmarking, and a local certification radius, derived from the decoder Jacobian and a Lipschitz bound, quantifies the geometric robustness of efficiency scores. We validate GeMA on synthetic data with non-convex frontiers, heterogeneous technologies and scale bias, and on four real-world case studies: global urban rail systems (COMET), British rail operators (ORR), national economies (Penn World Table) and a high-frequency wind-farm dataset. Across these domains GeMA behaves comparably to established methods when classical assumptions hold, and provides additional insight in settings with pronounced heterogeneity, non-convexity or size-related bias.",
+      "source": "arxiv",
+      "selection_source": "long-range"
+    }
+  ],
+  "errors": []
+}

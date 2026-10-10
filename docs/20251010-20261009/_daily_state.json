@@ -1,0 +1,41 @@
+{
+  "date": "20251010-20261009",
+  "date_label": "2025-10-10 ～ 2026-10-09",
+  "generated_at": "2026-10-10T02:27:35.105868+00:00",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.08530v1",
+      "route": "20251010-20261009/2608.08530v1",
+      "title": "A Unified Maximum-Margin Framework for Data Envelopment Analysis: Theoretical Foundations and Numerical Evidence",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml-dea"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将最大间隔思想引入DEA，解决高维小样本下效率区分力不足问题。",
+      "first_seen_at": "2026-10-10T02:27:35.105868+00:00",
+      "updated_at": "2026-10-10T02:27:35.105868+00:00"
+    },
+    {
+      "paper_id": "2603.16729v1",
+      "route": "20251010-20261009/2603.16729v1",
+      "title": "GeMA: Learning Latent Manifold Frontiers for Benchmarking Complex Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml-dea"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出基于流形学习的效率前沿方法，适用于机器学习与数据包络分析交叉领域。",
+      "first_seen_at": "2026-10-10T02:27:35.102017+00:00",
+      "updated_at": "2026-10-10T02:27:35.102017+00:00"
+    }
+  ]
+}
